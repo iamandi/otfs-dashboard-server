@@ -1,0 +1,45 @@
+{
+  "name": "otfs-dashboard-server",
+  "version": "1.0.0",
+  "description": "Express test server for static files, GET, POST requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "profile_auth_jwtPrivateKey=123 node index.js",
+    "dev:test": "profile_auth_jwtPrivateKey=123 nodemon index.js"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "Jessie Gou",
+  "contributors": [
+    "Aniruddha Kawade"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@meanie/joi-object-id": "^2.3.0",
+    "bcrypt": "^5.0.1",
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "express-async-errors": "^3.1.1",
+    "express-favicon": "^2.0.1",
+    "helmet": "^5.0.2",
+    "joi": "^17.6.0",
+    "joi-objectid": "^4.0.2",
+    "jose": "^4.5.0",
+    "js-file-download": "^0.4.12",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.2.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "secp256k1": "^4.0.3",
+    "winston": "^3.5.1",
+    "winston-mongodb": "^5.0.7"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "jshint": "^2.13.4"
+  }
+}

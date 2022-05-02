@@ -1,0 +1,15 @@
+index.js
+http://<host>:<port>/hello
+http://<host>:<port>/not-found
+http://<host>:<port>/static/hello.txt
+http://<host>:<port>/static/index.html
+http://<host>:<port>/static/style.css
+http://<host>:<port>/static/pug.jpg
+
+testLiveStream.js
+http://<host>:<port>/hello
+http://<host>:<port>/image
+http://<host>:<port>/videos
+
+videoStreamTcp.js
+http://<host>:<port>/video
