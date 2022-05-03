@@ -2,6 +2,7 @@
 const { Files, validate } = require('../models/files');
 const mongoose = require('mongoose');
 const path = require('path')
+const moment = require('moment');
 const express = require('express');
 const router = express.Router();
 
@@ -87,23 +88,57 @@ router.get('/folder/:parentId', async (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
-    const { name, type, owner, size, lastModified, resolvedPath, offline, extension } = req.body;
+// router.post('/', async (req, res) => {
+//     const { name, type, owner, size, lastModified, resolvedPath, offline, extension } = req.body;
+
+//     const id = mongoose.Types.ObjectId();
+//     console.log({ id });
+
+//     Files.add({
+//         id,
+//         name,
+//         type, owner, size, lastModified, resolvedPath, offline, extension
+//     })
+
+//     res.send({
+//         id,
+//         name,
+//         type, owner, size, lastModified, resolvedPath, offline, extension
+//     });
+// });
+
+router.post('/createFolder', async (req, res) => {
+    const { name, parent } = req.body;
 
     const id = mongoose.Types.ObjectId();
     console.log({ id });
 
-    Files.add({
-        id,
-        name,
-        type, owner, size, lastModified, resolvedPath, offline, extension
-    })
+    const resp = Files.findOneById(parent);
+    console.log('resp', resp);
 
-    res.send({
+    const fileStruct = {
         id,
         name,
-        type, owner, size, lastModified, resolvedPath, offline, extension
-    });
+        owner: 'Jessie Gou',
+        size: '',
+        type: 'directory',
+        lastModified: moment().utc(),
+        resolvedPath: (resp) ? resp.resolvedPath : 'Home/',
+        offline: false,
+        extension: 'none',
+        parent
+    }
+
+    Files.add(fileStruct);
+
+    res.send(fileStruct);
 });
+
+router.delete('/remove/:fileId', async (req, res) => {
+    const fileId = req.params.fileId;
+    const id = await Files.remove(fileId);
+
+    res.send(id);
+})
 
 module.exports = router;

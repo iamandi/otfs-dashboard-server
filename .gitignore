@@ -3,6 +3,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,linux,node
 
+
 ### Linux ###
 *~
 
@@ -12,6 +13,9 @@ old/
 old/*
 .vscode/
 .gitconfig
+
+# Force include below files
+!*/file-system/*
 
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*

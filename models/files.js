@@ -73,6 +73,7 @@ const filesDb = [
         offline: false,
         extension: "none",
         parent: '0',
+        count: 0
     },
     {
         id: '2',
@@ -80,11 +81,12 @@ const filesDb = [
         type: 'directory',
         owner: 'Jessie Gou',
         size: '',
-        lastModified: 'Wed, 02 Mar 22 21:14:12 GMT',
+        lastModified: 'Wed, 02 Mar 22 07:14:12 GMT',
         resolvedPath: 'Home/Private Documents',
         offline: false,
         extension: "none",
         parent: '0',
+        count: 1
     },
     {
         id: '3',
@@ -97,6 +99,7 @@ const filesDb = [
         offline: false,
         extension: "shared_folder",
         parent: '0',
+        count: 0
     },
     {
         id: '4',
@@ -224,7 +227,8 @@ const filesDb = [
         resolvedPath: 'Home/Private Documents/level1',
         offline: false,
         extension: "none",
-        parent: '2'
+        parent: '2',
+        count: 2
     },
     {
         id: '14',
@@ -235,7 +239,7 @@ const filesDb = [
         lastModified: 'Wed, 02 Mar 22 21:14:12 GMT',
         resolvedPath: 'Home/Private Documents/level1/hello-level1.txt',
         offline: false,
-        extension: "none",
+        extension: ".txt",
         parent: '13'
     },
     {
@@ -248,7 +252,8 @@ const filesDb = [
         resolvedPath: 'Home/Private Documents/level1/level2',
         offline: false,
         extension: "none",
-        parent: '13'
+        parent: '13',
+        count: 1
     },
     {
         id: '16',
@@ -259,9 +264,9 @@ const filesDb = [
         lastModified: 'Wed, 02 Mar 22 21:14:12 GMT',
         resolvedPath: 'Home/Private Documents/level1/level2/hello-level2.txt',
         offline: false,
-        extension: "none",
-        parent: '14'
-    }
+        extension: ".txt",
+        parent: '15'
+    },
 ]
 
 const Files = {};
@@ -294,6 +299,12 @@ Files.length = () => { return filesDb.length; }
 Files.add = (Files) => {
     const res = filesDb.push(Files);
     return (res && true);
+}
+
+Files.remove = (id) => {
+    filesDb.splice(filesDb.findIndex(v => v.id === id), 1);
+
+    return id;
 }
 
 exports.Files = Files;
