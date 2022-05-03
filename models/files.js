@@ -73,6 +73,7 @@ const filesDb = [
         offline: false,
         extension: "none",
         parent: '0',
+        like: false,
         count: 0
     },
     {
@@ -86,6 +87,7 @@ const filesDb = [
         offline: false,
         extension: "none",
         parent: '0',
+        like: false,
         count: 1
     },
     {
@@ -99,6 +101,7 @@ const filesDb = [
         offline: false,
         extension: "shared_folder",
         parent: '0',
+        like: false,
         count: 0
     },
     {
@@ -112,6 +115,7 @@ const filesDb = [
         offline: false,
         extension: ".txt",
         parent: '0',
+        like: true,
         preview: 'assets/uploads/preview/text-img.jpg'
     },
     {
@@ -125,6 +129,7 @@ const filesDb = [
         offline: false,
         extension: ".docx",
         parent: '0',
+        like: false,
         preview: 'assets/uploads/preview/document.webp'
     },
     {
@@ -138,6 +143,7 @@ const filesDb = [
         offline: false,
         extension: ".jpg",
         parent: '0',
+        like: true,
         preview: 'assets/uploads/pug.jpg'
     },
     {
@@ -151,6 +157,7 @@ const filesDb = [
         offline: false,
         extension: ".jpg",
         parent: '0',
+        like: false,
         preview: 'assets/images/etc/fuse-react-project-structure.jpg'
     },
     {
@@ -164,6 +171,7 @@ const filesDb = [
         offline: false,
         extension: ".log",
         parent: '0',
+        like: false,
         preview: 'assets/uploads/preview/crash_log.png'
     },
     {
@@ -177,6 +185,7 @@ const filesDb = [
         offline: false,
         extension: ".xlsx",
         parent: '0',
+        like: false,
         preview: 'assets/uploads/preview/budget.png'
     },
     {
@@ -190,6 +199,7 @@ const filesDb = [
         offline: false,
         extension: ".mp4",
         parent: '0',
+        like: false,
         preview: 'assets/uploads/preview/movie.jpg'
     },
     {
@@ -203,6 +213,7 @@ const filesDb = [
         offline: false,
         extension: ".xlsx",
         parent: '0',
+        like: false,
         preview: 'assets/uploads/preview/budget.png'
     },
     {
@@ -216,6 +227,7 @@ const filesDb = [
         offline: false,
         extension: "none",
         parent: '0',
+        like: false,
     },
     {
         id: '13',
@@ -228,6 +240,7 @@ const filesDb = [
         offline: false,
         extension: "none",
         parent: '2',
+        like: false,
         count: 2
     },
     {
@@ -240,7 +253,8 @@ const filesDb = [
         resolvedPath: 'Home/Private Documents/level1/hello-level1.txt',
         offline: false,
         extension: ".txt",
-        parent: '13'
+        parent: '13',
+        like: false,
     },
     {
         id: '15',
@@ -253,6 +267,7 @@ const filesDb = [
         offline: false,
         extension: "none",
         parent: '13',
+        like: false,
         count: 1
     },
     {
@@ -265,7 +280,8 @@ const filesDb = [
         resolvedPath: 'Home/Private Documents/level1/level2/hello-level2.txt',
         offline: false,
         extension: ".txt",
-        parent: '15'
+        parent: '15',
+        like: false,
     },
 ]
 
@@ -279,7 +295,7 @@ Files.findAllByPath = (path) => {
     // return filesDb.find(element => element._id === id);
 }
 
-Files.findAllById = (id) => {
+Files.findAllByParentId = (id) => {
     console.log('id', id);
     console.log(typeof id);
     return filesDb.filter(element => element.parent === id);
@@ -305,6 +321,18 @@ Files.remove = (id) => {
     filesDb.splice(filesDb.findIndex(v => v.id === id), 1);
 
     return id;
+}
+
+Files.update = (id, like) => {
+    const file = filesDb.find(element => element.id === id);
+    // console.log('file', file);
+    file.like = like;
+
+    return file;
+}
+
+Files.getAllLiked = () => {
+    return filesDb.filter(element => element.like === true);
 }
 
 exports.Files = Files;

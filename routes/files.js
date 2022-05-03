@@ -15,20 +15,23 @@ const router = express.Router();
 // });
 
 router.get('/nested-file-structure-db', async (req, res) => {
-    const files = await Files.getAll();
+    const params = req.params;
+    const query = req.query;
+    console.log('params', params)
+    console.log('query', query)
 
-    res.send(files);
+    res.send('nested-file-structure-db');
 });
 
-router.get('/:fileId', async (req, res) => {
-    console.log('req.params.fileId', req.params.fileId);
+// router.get('/:fileId', async (req, res) => {
+//     console.log('req.params.fileId', req.params.fileId);
 
-    const { fileId } = req.params;
+//     const { fileId } = req.params;
 
-    const files = await Files.findOneById(fileId);
+//     const files = await Files.findOneById(fileId);
 
-    res.send(files);
-});
+//     res.send(files);
+// });
 
 router.get('/file/:fileId', async (req, res) => {
     console.log('req.params.fileId', req.params.fileId);
@@ -75,12 +78,13 @@ router.get('/file/:fileId', async (req, res) => {
 });
 
 router.get('/folder/:parentId', async (req, res) => {
+    console.log('/folder/:parentId')
     console.log('req.path', req.path);
     console.log('req.params.parentId', req.params.parentId);
 
     const { parentId } = req.params;
 
-    const files = await Files.findAllById(parentId);
+    const files = await Files.findAllByParentId(parentId);
     if (parentId === 0) console.log('>>>>>>>>>>');
     // if (parentId !== 0) console.log('files', files);
 
@@ -139,6 +143,6 @@ router.delete('/remove/:fileId', async (req, res) => {
     const id = await Files.remove(fileId);
 
     res.send(id);
-})
+});
 
 module.exports = router;

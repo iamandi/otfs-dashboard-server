@@ -6,6 +6,7 @@ const auth = require('../routes/auth');
 const uploads = require('../routes/uploads');
 const files = require('../routes/files');
 const trash = require('../routes/trash');
+const like = require('../routes/like');
 const error = require('../middleware/error');
 
 module.exports = function (app) {
@@ -18,5 +19,6 @@ module.exports = function (app) {
     app.use('/api/file-manager-app/files', files);
     app.use('/home', files);
     app.use('/trash', trash);
+    app.use('/like', like);
     app.use(error);
 };
