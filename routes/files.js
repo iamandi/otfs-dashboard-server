@@ -73,24 +73,42 @@ router.get('/file/:fileId', async (req, res) => {
                 return res.status(500).end(err.message);
             }
         }
-        console.log('file downloaded');
+        console.log('file downloaded!');
     });
 });
 
 router.get('/folder/:parentId', async (req, res) => {
     console.log('/folder/:parentId')
-    console.log('req.path', req.path);
-    console.log('req.params.parentId', req.params.parentId);
+    console.log({ 'req.path': req.path, parentId: req.params.parentId })
 
     const { parentId } = req.params;
 
     const files = await Files.findAllByParentId(parentId);
-    if (parentId === 0) console.log('>>>>>>>>>>');
-    // if (parentId !== 0) console.log('files', files);
 
+    // if (files.length === 0) {
+    //     // Folder is empty so send path of the current folder
+    //     const folder = await Files.findOneById(parentId);
+    //     console.log('folder', folder);
+
+    //     return res.send([{
+    //         resolvedPath: folder.resolvedPath,
+    //         parent: folder.parent
+    //     }])
+    // }
     res.send(files);
 });
 
+router.get('/folder-by-id/:id', async (req, res) => {
+    console.log('/folder-by-id/:id')
+    console.log({ 'req.path': req.path, id: req.params.id })
+
+    const { id } = req.params;
+
+    const file = await Files.findOneById(id);
+    console.log('file', file);
+
+    res.send(file);
+});
 
 // router.post('/', async (req, res) => {
 //     const { name, type, owner, size, lastModified, resolvedPath, offline, extension } = req.body;

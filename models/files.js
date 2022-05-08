@@ -63,6 +63,18 @@ function validateFile(file) {
 
 const filesDb = [
     {
+        id: '0',
+        name: "All Files",
+        type: "folder",
+        owner: "Jessie Gou",
+        offline: false,
+        extension: "none",
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }]
+    },
+    {
         id: '1',
         name: 'Work Documents',
         type: 'directory',
@@ -74,7 +86,17 @@ const filesDb = [
         extension: "none",
         parent: '0',
         like: false,
-        count: 0
+        trashed: false,
+        count: 0,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '1',
+            "type": "folder",
+            "name": "Work Documents",
+            "parentFolderID": '0'
+        }]
     },
     {
         id: '2',
@@ -88,7 +110,17 @@ const filesDb = [
         extension: "none",
         parent: '0',
         like: false,
-        count: 1
+        trashed: false,
+        count: 1,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '2',
+            "type": "folder",
+            "name": "Private Documents",
+            "parentFolderID": '0'
+        }]
     },
     {
         id: '3',
@@ -102,7 +134,17 @@ const filesDb = [
         extension: "shared_folder",
         parent: '0',
         like: false,
-        count: 0
+        trashed: false,
+        count: 0,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '3',
+            "type": "folder",
+            "name": "Public Documents",
+            "parentFolderID": '0'
+        }]
     },
     {
         id: '4',
@@ -116,6 +158,7 @@ const filesDb = [
         extension: ".txt",
         parent: '0',
         like: true,
+        trashed: false,
         preview: 'assets/uploads/preview/text-img.jpg'
     },
     {
@@ -130,6 +173,7 @@ const filesDb = [
         extension: ".docx",
         parent: '0',
         like: false,
+        trashed: false,
         preview: 'assets/uploads/preview/document.webp'
     },
     {
@@ -144,6 +188,7 @@ const filesDb = [
         extension: ".jpg",
         parent: '0',
         like: true,
+        trashed: false,
         preview: 'assets/uploads/pug.jpg'
     },
     {
@@ -158,6 +203,7 @@ const filesDb = [
         extension: ".jpg",
         parent: '0',
         like: false,
+        trashed: false,
         preview: 'assets/images/etc/fuse-react-project-structure.jpg'
     },
     {
@@ -172,6 +218,7 @@ const filesDb = [
         extension: ".log",
         parent: '0',
         like: false,
+        trashed: false,
         preview: 'assets/uploads/preview/crash_log.png'
     },
     {
@@ -186,6 +233,7 @@ const filesDb = [
         extension: ".xlsx",
         parent: '0',
         like: false,
+        trashed: false,
         preview: 'assets/uploads/preview/budget.png'
     },
     {
@@ -200,6 +248,7 @@ const filesDb = [
         extension: ".mp4",
         parent: '0',
         like: false,
+        trashed: false,
         preview: 'assets/uploads/preview/movie.jpg'
     },
     {
@@ -214,6 +263,7 @@ const filesDb = [
         extension: ".xlsx",
         parent: '0',
         like: false,
+        trashed: false,
         preview: 'assets/uploads/preview/budget.png'
     },
     {
@@ -228,6 +278,7 @@ const filesDb = [
         extension: "none",
         parent: '0',
         like: false,
+        trashed: false,
     },
     {
         id: '13',
@@ -241,7 +292,20 @@ const filesDb = [
         extension: "none",
         parent: '2',
         like: false,
-        count: 2
+        trashed: false,
+        count: 2,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '2',
+            "name": "Private Documents"
+        }, {
+            "id": '13',
+            "type": "folder",
+            "name": "level1",
+            "parentFolderID": '2'
+        }]
     },
     {
         id: '14',
@@ -255,6 +319,24 @@ const filesDb = [
         extension: ".txt",
         parent: '13',
         like: false,
+        trashed: false,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '2',
+            "name": "Private Documents"
+        }, {
+            "id": '13',
+            "type": "folder",
+            "name": "level1",
+            "parentFolderID": '2'
+        }, {
+            "id": '14',
+            "type": "file",
+            "name": "hello-level1.txt",
+            "parentFolderID": '13'
+        }]
     },
     {
         id: '15',
@@ -268,7 +350,25 @@ const filesDb = [
         extension: "none",
         parent: '13',
         like: false,
-        count: 1
+        trashed: false,
+        count: 1,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '2',
+            "name": "Private Documents"
+        }, {
+            "id": '13',
+            "type": "folder",
+            "name": "level1",
+            "parentFolderID": '2'
+        }, {
+            "id": '15',
+            "type": "folder",
+            "name": "level2",
+            "parentFolderID": '13'
+        }]
     },
     {
         id: '16',
@@ -282,6 +382,93 @@ const filesDb = [
         extension: ".txt",
         parent: '15',
         like: false,
+        trashed: false,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '2',
+            "name": "Private Documents"
+        }, {
+            "id": '13',
+            "type": "folder",
+            "name": "level1",
+            "parentFolderID": '2'
+        }, {
+            "id": '15',
+            "type": "folder",
+            "name": "level2",
+            "parentFolderID": '13'
+        }, {
+            "id": '16',
+            "type": "file",
+            "name": "hello-level2.txt",
+            "parentFolderID": '15'
+        }]
+    },
+    {
+        id: '17',
+        name: 'Empty folder',
+        type: 'directory',
+        owner: 'Jessie Gou',
+        size: '',
+        lastModified: 'Wed, 27 Apr 22 21:14:12 GMT',
+        resolvedPath: 'Home/Private Documents/level1/level2/Empty folder',
+        offline: false,
+        extension: "none",
+        parent: '15',
+        like: false,
+        trashed: false,
+        count: 0,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '2',
+            "name": "Private Documents"
+        }, {
+            "id": '13',
+            "type": "folder",
+            "name": "level1",
+            "parentFolderID": '2'
+        }, {
+            "id": '15',
+            "type": "folder",
+            "name": "level2",
+            "parentFolderID": '13'
+        }, {
+            "id": '17',
+            "type": "folder",
+            "name": "Empty folder",
+            "parentFolderID": '15'
+        }]
+    },
+    {
+        id: '18',
+        name: 'Empty folder',
+        type: 'directory',
+        owner: 'Jessie Gou',
+        size: '',
+        lastModified: 'Wed, 27 Apr 22 21:14:12 GMT',
+        resolvedPath: 'Home/Public Documents/Empty folder',
+        offline: false,
+        extension: "none",
+        parent: '3',
+        like: false,
+        trashed: false,
+        count: 0,
+        path: [{
+            "id": '0',
+            "name": "All Files"
+        }, {
+            "id": '3',
+            "name": "Public Documents"
+        }, {
+            "id": '18',
+            "type": "folder",
+            "name": "Empty folder",
+            "parentFolderID": '3'
+        }]
     },
 ]
 
@@ -296,8 +483,7 @@ Files.findAllByPath = (path) => {
 }
 
 Files.findAllByParentId = (id) => {
-    console.log('id', id);
-    console.log(typeof id);
+    console.log('Files.findAllByParentId: id', id);
     return filesDb.filter(element => element.parent === id);
 }
 
@@ -333,6 +519,14 @@ Files.update = (id, like) => {
 
 Files.getAllLiked = () => {
     return filesDb.filter(element => element.like === true);
+}
+
+Files.findByIdAndUpdate = (id, { trashed }) => {
+    console.log('trashed', trashed);
+    const file = filesDb.find(element => element.id === id);
+    file.trashed = trashed;
+
+    return filesDb.find(element => element.id === id);
 }
 
 exports.Files = Files;
