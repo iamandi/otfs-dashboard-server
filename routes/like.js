@@ -14,10 +14,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     console.log('Update like')
     const { id, like } = req.body;
-    // console.log({ id, like });
+    console.log({ id, like });
 
     const resp = Files.update(id, like);
-    // console.log('resp', resp);
+    console.log('resp', resp);
 
     res.send(resp);
 });

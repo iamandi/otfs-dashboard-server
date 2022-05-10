@@ -4,7 +4,7 @@
   "description": "Express test server for static files, GET, POST requests",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watchAll --verbose --maxWorkers=1",
     "dev": "profile_auth_jwtPrivateKey=123 node index.js",
     "dev:test": "profile_auth_jwtPrivateKey=123 nodemon index.js"
   },
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "jshint": "^2.13.4"
+    "jshint": "^2.13.4",
+    "supertest": "^6.2.3"
   }
 }

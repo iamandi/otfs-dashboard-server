@@ -6,14 +6,6 @@ const moment = require('moment');
 const express = require('express');
 const router = express.Router();
 
-// router.get('/', async (req, res) => {
-//     console.log('>> route', req.path);
-//     console.log('req.params', req.params)
-//     const files = await Files.getAll();
-
-//     res.send(files);
-// });
-
 router.get('/nested-file-structure-db', async (req, res) => {
     const params = req.params;
     const query = req.query;
@@ -23,23 +15,16 @@ router.get('/nested-file-structure-db', async (req, res) => {
     res.send('nested-file-structure-db');
 });
 
-// router.get('/:fileId', async (req, res) => {
-//     console.log('req.params.fileId', req.params.fileId);
-
-//     const { fileId } = req.params;
-
-//     const files = await Files.findOneById(fileId);
-
-//     res.send(files);
-// });
-
 router.get('/file/:fileId', async (req, res) => {
     console.log('req.params.fileId', req.params.fileId);
 
     const { fileId } = req.params;
+    if (!fileId || fileId === 'undefined') return res.status(400).send('provide file id');
 
     const file = await Files.findOneById(fileId);
     console.log('file', file);
+
+    if (!file) return res.status(404).send('Not found!');
 
     if (file.type === 'folder' || file.type === 'directory' || file.type === 'shared_folder')
         return res.status(400).send('Downloading a folder is not allowed.')
@@ -49,19 +34,6 @@ router.get('/file/:fileId', async (req, res) => {
 
     const fileDirectory = path.join(__dirname, `../file-system/${resolvedPath}`);
     console.log({ fileDirectory });
-
-    // res.type('application/octet-stream');
-    // res.sendFile('Private Documents/level1/hello-level2.txt', { root: fileDirectory }, (err) => {
-    // res.attachment(file.name).sendFile(fileDirectory, (err) => {
-    //     if (err) {
-    //         console.log('\nerr', err);
-    //         if (err.statusCode === 404) return res.status(err.statusCode).end('File not found');
-    //         if (err.statusCode === 500) return res.status(err.statusCode).end('Interval server error');
-    //         return res.status(500).end(err.message);
-    //     }
-
-    //     res.end();
-    // });
 
     res.type('application/octet-stream');
     res.download(fileDirectory, (err) => {
@@ -78,23 +50,16 @@ router.get('/file/:fileId', async (req, res) => {
 });
 
 router.get('/folder/:parentId', async (req, res) => {
-    console.log('/folder/:parentId')
+    console.log('\n\n\n/folder/:parentId')
     console.log({ 'req.path': req.path, parentId: req.params.parentId })
 
     const { parentId } = req.params;
+    if (!parentId || parentId === 'undefined') return res.status(400).send('provide parent id');
 
     const files = await Files.findAllByParentId(parentId);
 
-    // if (files.length === 0) {
-    //     // Folder is empty so send path of the current folder
-    //     const folder = await Files.findOneById(parentId);
-    //     console.log('folder', folder);
+    if (!files || files.length < 1) return res.status(404).send('Not found!');
 
-    //     return res.send([{
-    //         resolvedPath: folder.resolvedPath,
-    //         parent: folder.parent
-    //     }])
-    // }
     res.send(files);
 });
 
@@ -103,9 +68,12 @@ router.get('/folder-by-id/:id', async (req, res) => {
     console.log({ 'req.path': req.path, id: req.params.id })
 
     const { id } = req.params;
+    if (!id || id === 'undefined') return res.status(400).send('provide folder id');
 
     const file = await Files.findOneById(id);
-    console.log('file', file);
+    console.log('>>>>> file', file);
+
+    if (!file || file === '') return res.status(404).send('Not found!');
 
     res.send(file);
 });

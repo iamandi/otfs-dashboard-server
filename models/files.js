@@ -474,59 +474,65 @@ const filesDb = [
 
 const Files = {};
 
-Files.findAllByPath = (path) => {
-    const files = filesDb.find(x => x.resolvedPath === path);
-    console.log('files', files)
-
-    return files;
-    // return filesDb.find(element => element._id === id);
-}
-
 Files.findAllByParentId = (id) => {
     console.log('Files.findAllByParentId: id', id);
     return filesDb.filter(element => element.parent === id);
 }
 
 Files.findOneById = (id) => {
-    return filesDb.find(element => element.id === id.toString());
-}
-
-Files.getAll = () => {
-    return filesDb;
+    return filesDb.find(element => element.id === id);
 }
 
 Files.length = () => { return filesDb.length; }
-
 
 Files.add = (Files) => {
     const res = filesDb.push(Files);
     return (res && true);
 }
 
-Files.remove = (id) => {
-    filesDb.splice(filesDb.findIndex(v => v.id === id), 1);
 
-    return id;
-}
-
-Files.update = (id, like) => {
-    const file = filesDb.find(element => element.id === id);
-    // console.log('file', file);
-    file.like = like;
-
-    return file;
-}
-
+// FAVORITES
 Files.getAllLiked = () => {
     return filesDb.filter(element => element.like === true);
 }
 
-Files.findByIdAndUpdate = (id, { trashed }) => {
-    console.log('trashed', trashed);
+Files.findOneLikedById = (id) => {
+    return filesDb.find(element => element.id === id && element.like);
+}
+
+Files.findLikedByIdAndUpdate = (id, { like }) => {
+    console.log({ like });
+    const file = filesDb.find(element => element.id === id);
+    file.like = like;
+
+    return filesDb.find(element => element.id === id);
+}
+
+
+// TRASH
+Files.getAllTrashed = () => {
+    return filesDb.filter(element => element.like === true);;
+}
+
+Files.findOneTrashedById = (id) => {
+    return filesDb.find(element => element.id === id && element.trashed);
+}
+
+Files.findTrashByIdAndUpdate = (id, { trashed }) => {
+    console.log({ trashed });
     const file = filesDb.find(element => element.id === id);
     file.trashed = trashed;
 
     return filesDb.find(element => element.id === id);
+}
+
+Files.removeTrashPermanently = (id) => {
+    const file = filesDb.findIndex(element => element.id === id)
+    if (!file || !file.trashed) return { error: true };
+
+    filesDb.splice(file, 1);
+
+    return id;
 }
 
 exports.Files = Files;

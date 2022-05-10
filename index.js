@@ -8,4 +8,6 @@ require("./startup/config")();
 require("./startup/validation")();
 
 const port = process.env.PORT || 5001;
-app.listen(port, () => logger.info(`Listening on ${port}...`));
+module.exports = app.listen(port, () => {
+  logger.info(`Listening on port ${port}...`);
+});
