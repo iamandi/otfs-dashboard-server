@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     const { id, like } = req.body;
     console.log({ id, like });
 
-    const resp = Files.update(id, like);
+    const resp = Files.findLikedByIdAndUpdate(id, like);
     console.log('resp', resp);
 
     res.send(resp);

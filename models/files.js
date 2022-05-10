@@ -500,9 +500,10 @@ Files.findOneLikedById = (id) => {
     return filesDb.find(element => element.id === id && element.like);
 }
 
-Files.findLikedByIdAndUpdate = (id, { like }) => {
-    console.log({ like });
-    const file = filesDb.find(element => element.id === id);
+Files.findLikedByIdAndUpdate = (id, like) => {
+    console.log({ id, like });
+    const file = Files.findOneById(id);
+    console.log('file', file)
     file.like = like;
 
     return filesDb.find(element => element.id === id);
