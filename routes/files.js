@@ -58,8 +58,13 @@ router.get('/folder/:parentId', async (req, res) => {
 
     const files = await Files.findAllByParentId(parentId);
 
-    if (!files || files.length < 1) return res.status(404).send('Not found!');
+    if (!files || files.length === 0) {
+        const file = await Files.findOneById(parentId);
 
+        if (!file || file === '') return res.status(404).send('Parent folder not found!');
+    }
+
+    // Empty folder
     res.send(files);
 });
 

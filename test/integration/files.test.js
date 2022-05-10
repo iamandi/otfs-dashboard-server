@@ -45,7 +45,14 @@ describe('/home', () => {
       expect(res.status).toBe(400);
     });
 
-    it('should return 404 if parentId is not found', async () => {
+    it('should return 200 with empty body if parentId folder is empty', async () => {
+      const res = await execute('17');
+
+      expect(res.status).toBe(200);
+      expect(res.body.length).toBe(0);
+    });
+
+    it('should return 404 if parentId folder is not found', async () => {
       const res = await execute('909');
 
       expect(res.status).toBe(404);
