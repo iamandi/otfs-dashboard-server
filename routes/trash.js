@@ -50,6 +50,31 @@ router.post('/', async (req, res) => {
     res.send(file);
 });
 
+router.post('/restore', async (req, res) => {
+    const { id } = req.body;
+    console.log('/restore:', { id });
+
+    if (!id || id === 'undefined' || typeof id !== 'string') return res.status(400).send("Provide valid id");
+
+    const file = Trash.findOneById(id);
+    if (!file) return res.status(404).send('The file with the given ID was not found.');
+
+    file.lastModified = new Date();
+
+    const result = Files.add(file);
+    console.log('restore successful?', result);
+
+    const resp = Trash.delete(id);
+    if (!resp) return res.status(500).send('Could not delete file in the Trash DB');
+
+    if (!result) {
+        console.log('Couldnt add file to trash. TODO: reverse the operation');
+        return res.status(500).send('Couldnt add file to trash. TODO: reverse the operation');
+    }
+
+    res.send(file);
+});
+
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     console.log({ id });
