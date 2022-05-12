@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 const config = require('config');
+const { filesDb } = require('./file');
 
 const trashDb = [
     {
@@ -32,7 +33,7 @@ const trashDb = [
     },
     {
         "id": "41",
-        "name": "trashed1.txt",
+        "name": "trashed2.txt",
         "type": "file",
         "owner": "Jessie Gou",
         "size": "",
@@ -52,14 +53,14 @@ const trashDb = [
             {
                 "id": "41",
                 "type": "file",
-                "name": "trashed1.txt",
+                "name": "trashed2.txt",
                 "parentFolderID": "0"
             }
         ]
     },
     {
         "id": "51",
-        "name": "trashed1.txt",
+        "name": "trashed3.txt",
         "type": "file",
         "owner": "Jessie Gou",
         "size": "",
@@ -79,13 +80,18 @@ const trashDb = [
             {
                 "id": "51",
                 "type": "file",
-                "name": "trashed1.txt",
+                "name": "trashed3.txt",
                 "parentFolderID": "0"
             }
         ]
     }];
 
 const Trash = {};
+
+Trash.add = (file) => {
+    const res = trashDb.push(file);
+    return (res && true);
+}
 
 Trash.getAll = () => {
     return trashDb;
@@ -95,10 +101,42 @@ Trash.findOneById = (id) => {
     return trashDb.find(element => element.id === id.toString());
 }
 
-Trash.remove = (id) => {
-    trashDb.splice(trashDb.findIndex(v => v.id === id), 1);
+Trash.delete = (id) => {
+    const index = trashDb.findIndex(element => element.id === id)
+    // console.log('Trash.delete - index', index);
 
-    return id;
+    if (index < 0) return null;
+
+    const file = trashDb.splice(index, 1);
+    console.log('trashDb.splice: file', file);
+
+    return file;
 }
+
+// TRASH
+// Files.getAllTrashed = () => {
+//     return filesDb.filter(element => element.like === true);;
+// }
+
+// Files.findOneTrashedById = (id) => {
+//     return filesDb.find(element => element.id === id && element.trashed);
+// }
+
+// Files.findTrashByIdAndUpdate = (id, { trashed }) => {
+//     console.log({ trashed });
+//     const file = filesDb.find(element => element.id === id);
+//     file.trashed = trashed;
+
+//     return filesDb.find(element => element.id === id);
+// }
+
+// Files.removeTrashPermanently = (id) => {
+//     const file = filesDb.findIndex(element => element.id === id)
+//     if (!file || !file.trashed) return { error: true };
+
+//     filesDb.splice(file, 1);
+
+//     return id;
+// }
 
 exports.Trash = Trash;

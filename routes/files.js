@@ -1,5 +1,5 @@
 'use strict';
-const { Files, validate } = require('../models/files');
+const { Files, validate } = require('../models/file');
 const mongoose = require('mongoose');
 const path = require('path')
 const moment = require('moment');

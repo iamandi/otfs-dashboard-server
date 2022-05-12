@@ -86,7 +86,6 @@ const filesDb = [
         extension: "none",
         parent: '0',
         like: false,
-        trashed: false,
         count: 0,
         path: [{
             "id": '0',
@@ -110,7 +109,6 @@ const filesDb = [
         extension: "none",
         parent: '0',
         like: false,
-        trashed: false,
         count: 1,
         path: [{
             "id": '0',
@@ -134,7 +132,6 @@ const filesDb = [
         extension: "shared_folder",
         parent: '0',
         like: false,
-        trashed: false,
         count: 0,
         path: [{
             "id": '0',
@@ -158,7 +155,6 @@ const filesDb = [
         extension: ".txt",
         parent: '0',
         like: true,
-        trashed: false,
         preview: 'assets/uploads/preview/text-img.jpg'
     },
     {
@@ -173,7 +169,6 @@ const filesDb = [
         extension: ".docx",
         parent: '0',
         like: false,
-        trashed: false,
         preview: 'assets/uploads/preview/document.webp'
     },
     {
@@ -188,7 +183,6 @@ const filesDb = [
         extension: ".jpg",
         parent: '0',
         like: true,
-        trashed: false,
         preview: 'assets/uploads/pug.jpg'
     },
     {
@@ -203,7 +197,6 @@ const filesDb = [
         extension: ".jpg",
         parent: '0',
         like: false,
-        trashed: false,
         preview: 'assets/images/etc/fuse-react-project-structure.jpg'
     },
     {
@@ -218,7 +211,6 @@ const filesDb = [
         extension: ".log",
         parent: '0',
         like: false,
-        trashed: false,
         preview: 'assets/uploads/preview/crash_log.png'
     },
     {
@@ -233,7 +225,6 @@ const filesDb = [
         extension: ".xlsx",
         parent: '0',
         like: false,
-        trashed: false,
         preview: 'assets/uploads/preview/budget.png'
     },
     {
@@ -248,7 +239,6 @@ const filesDb = [
         extension: ".mp4",
         parent: '0',
         like: false,
-        trashed: false,
         preview: 'assets/uploads/preview/movie.jpg'
     },
     {
@@ -263,7 +253,6 @@ const filesDb = [
         extension: ".xlsx",
         parent: '0',
         like: false,
-        trashed: false,
         preview: 'assets/uploads/preview/budget.png'
     },
     {
@@ -278,7 +267,6 @@ const filesDb = [
         extension: "none",
         parent: '0',
         like: false,
-        trashed: false,
     },
     {
         id: '13',
@@ -292,7 +280,6 @@ const filesDb = [
         extension: "none",
         parent: '2',
         like: false,
-        trashed: false,
         count: 2,
         path: [{
             "id": '0',
@@ -319,7 +306,6 @@ const filesDb = [
         extension: ".txt",
         parent: '13',
         like: false,
-        trashed: false,
         path: [{
             "id": '0',
             "name": "All Files"
@@ -350,7 +336,6 @@ const filesDb = [
         extension: "none",
         parent: '13',
         like: false,
-        trashed: false,
         count: 1,
         path: [{
             "id": '0',
@@ -382,7 +367,6 @@ const filesDb = [
         extension: ".txt",
         parent: '15',
         like: false,
-        trashed: false,
         path: [{
             "id": '0',
             "name": "All Files"
@@ -418,7 +402,6 @@ const filesDb = [
         extension: "none",
         parent: '15',
         like: false,
-        trashed: false,
         count: 0,
         path: [{
             "id": '0',
@@ -455,7 +438,6 @@ const filesDb = [
         extension: "none",
         parent: '3',
         like: false,
-        trashed: false,
         count: 0,
         path: [{
             "id": '0',
@@ -490,52 +472,21 @@ Files.add = (Files) => {
     return (res && true);
 }
 
-
-// FAVORITES
-Files.getAllLiked = () => {
-    return filesDb.filter(element => element.like === true);
-}
-
-Files.findOneLikedById = (id) => {
-    return filesDb.find(element => element.id === id && element.like);
-}
-
-Files.findLikedByIdAndUpdate = (id, like) => {
-    console.log({ id, like });
-    const file = Files.findOneById(id);
-    console.log('file', file)
-    file.like = like;
-
-    return filesDb.find(element => element.id === id);
-}
-
-
-// TRASH
-Files.getAllTrashed = () => {
-    return filesDb.filter(element => element.like === true);;
-}
-
-Files.findOneTrashedById = (id) => {
-    return filesDb.find(element => element.id === id && element.trashed);
-}
-
-Files.findTrashByIdAndUpdate = (id, { trashed }) => {
-    console.log({ trashed });
+Files.delete = (id) => {
     const file = filesDb.find(element => element.id === id);
-    file.trashed = trashed;
 
-    return filesDb.find(element => element.id === id);
-}
+    const index = filesDb.findIndex(element => element.id === id)
+    // console.log('Files.delete - index', index);
 
-Files.removeTrashPermanently = (id) => {
-    const file = filesDb.findIndex(element => element.id === id)
-    if (!file || !file.trashed) return { error: true };
+    if (index < 0) return null;
 
-    filesDb.splice(file, 1);
+    filesDb.splice(index, 1);
+    // console.log('Files.delete - filesDb.find(file)', filesDb.find(element => element.id === id));
 
-    return id;
+    return file;
 }
 
 exports.Files = Files;
+exports.filesDb = filesDb;
 exports.filesSchema = filesSchema;
 exports.validate = validateFile;

@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { Files } = require('../../models/files');
+const { Files } = require('../../models/file');
 
 describe('/home', () => {
   let server;
