@@ -9,15 +9,14 @@ const trashDb = [
         "name": "trashed1.txt",
         "type": "file",
         "owner": "Jessie Gou",
-        "size": "",
+        "size": "4KB",
         "lastModified": "Wed, 27 Apr 22 21:14:12 GMT",
-        "resolvedPath": "Home/trashed1.txt",
+        "resolvedPath": "All Files/trashed1.txt",
         "offline": false,
-        "extension": "none",
+        "extension": ".txt",
         "parent": "0",
         "like": false,
         "trashed": false,
-        "count": 0,
         "path": [
             {
                 "id": "0",
@@ -36,25 +35,29 @@ const trashDb = [
         "name": "trashed2.txt",
         "type": "file",
         "owner": "Jessie Gou",
-        "size": "",
+        "size": "4KB",
         "lastModified": "Wed, 27 Apr 22 21:14:12 GMT",
-        "resolvedPath": "Home/trashed1.txt",
+        "resolvedPath": "Home/Work Documents/trashed1.txt",
         "offline": false,
-        "extension": "none",
-        "parent": "0",
+        "extension": ".txt",
+        "parent": "1",
         "like": false,
         "trashed": false,
-        "count": 0,
         "path": [
             {
                 "id": "0",
                 "name": "All Files"
+            }, {
+                "id": '1',
+                "type": "folder",
+                "name": "Work Documents",
+                "parentFolderID": '0'
             },
             {
                 "id": "41",
                 "type": "file",
                 "name": "trashed2.txt",
-                "parentFolderID": "0"
+                "parentFolderID": "1"
             }
         ]
     },
@@ -63,15 +66,14 @@ const trashDb = [
         "name": "trashed3.txt",
         "type": "file",
         "owner": "Jessie Gou",
-        "size": "",
+        "size": "4KB",
         "lastModified": "Wed, 27 Apr 22 21:14:12 GMT",
         "resolvedPath": "Home/trashed1.txt",
         "offline": false,
-        "extension": "none",
+        "extension": ".txt",
         "parent": "0",
         "like": false,
         "trashed": false,
-        "count": 0,
         "path": [
             {
                 "id": "0",
