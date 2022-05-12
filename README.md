@@ -2,4 +2,4 @@
 
 # TODO
 
--   [ ] Restore file under the correct directory.
+-   [x] Restore file under the correct directory.
